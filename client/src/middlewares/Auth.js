@@ -10,14 +10,12 @@ export const AuthProvider = ({ children }) => {
         const response = await fetch("http://localhost:4000/api/v1/user/", {
           credentials: "same-origin", 
         });
-        console.log(response)
         if (!response.ok) {
           return "";
         }
         else{
           const result = await response.json();
           return result.id;
-          console.log("IS LOGGED IN VALUE IS ::::", result.id);
         }
         return isLoggedIn;
         
@@ -99,9 +97,34 @@ export const AuthProvider = ({ children }) => {
     const logout = () => {
       setIsLoggedIn("");
     };
+    
+    const ListDoc= async (id)=>{
+      try{
+        
+          const response = await fetch("http://localhost:4000/api/v1/doc/loadFiles", {
+            method: "POST",
+            credentials:"same-origin",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({"id": `${id}`}),
+            })
   
+          if(!response.ok){
+              return "";
+          }
+          else{
+            const result = await response.json();
+            return result.data;
+          }
+  
+      } catch(err){
+        console.error(err);
+  
+      }
+     }
     return (
-      <AuthContext.Provider value={{ login, logout, fetchData, setIsLoggedIn, isLoggedIn, sendOTP, signup }}>
+      <AuthContext.Provider value={{ login, logout, fetchData, setIsLoggedIn, isLoggedIn, sendOTP, signup, ListDoc }}>
         {children}
       </AuthContext.Provider>
     );

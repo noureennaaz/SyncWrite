@@ -24,19 +24,19 @@ const UserSchema = new mongoose.Schema({
     image:{
         type:String
     },
-    CreatedFiles:[{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'File'
+    // CreatedFiles:[{
+    //     type:mongoose.Schema.Types.ObjectId,
+    //     ref:'File'
         
-    }],
-    SharedFiles:[{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'File'
-    }],
-    viewOnlyFiles:[{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'File'
-    }]
+    // }],
+    // SharedFiles:[{
+    //     type:mongoose.Schema.Types.ObjectId,
+    //     ref:'File'
+    // }],
+    // viewOnlyFiles:[{
+    //     type:mongoose.Schema.Types.ObjectId,
+    //     ref:'File'
+    // }]
 })
 
 module.exports= mongoose.model("User", UserSchema)

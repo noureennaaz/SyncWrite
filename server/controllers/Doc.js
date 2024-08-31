@@ -4,20 +4,39 @@ exports.CreateDoc = async (req, res) => {
   console.log(req.body);
   try {
     
-    const {id , title  , isPublic} = req.body;
-  
-    if(!title){
-        title= require('crypto').randomBytes(8).toString('hex');
+    const {title  , isPublic , id} = req.body;
+    
+
+    if(!id){
+      return res.status(404).json({
+        success: false,
+        message:"failed to fetch id for doc creation"
+      })
     }
     
-    if(!isPublic){
-        isPublic=false;
+    console.log('initiated creation')
+
+    var Doctitle="";
+    var PublicAccess= false;
+    if(!title){
+      Doctitle= require('crypto').randomBytes(8).toString('hex');
+    }
+    else{
+      Doctitle= title;
+    }
+     
+    console.log(id)
+    
+    if(isPublic){
+      PublicAccess=true;
     }
     const newDoc = await Files.create({
+        Owner:id,
         CreatedBy:id,
         Title:title,
         Body:"",
-        isPublic
+        isPublic:PublicAccess,
+        lastUpdatedAt:Date.now()
     })
     if(!newDoc){
         return res.status(400).json({
@@ -25,7 +44,7 @@ exports.CreateDoc = async (req, res) => {
             message: "Problem occured while creating the document",
           });
     }
-    return res.status(400).json({
+    return res.status(200).json({
         success: true,
         message: "Document created Successfully",
         newDoc

@@ -1,9 +1,19 @@
 import { Navigate } from "react-router-dom"
-const PrivateRoute=({loggedIn, children, route})=>
+import { useAuth } from "../middlewares/Auth"
+import { useEffect , useState} from "react";
+
+    
+
+const PrivateRoute=({ children, route})=>
 {
-   
-    console.log('userlogin=' + loggedIn);
-    if(loggedIn)
+    const {fetchData} = useAuth();
+    const [login , setLogin]= useState("");
+    useEffect(()=>{
+        setLogin(fetchData());
+        console.log(login)
+    }, [])
+
+    if(setLogin)
        return children;
     else
         return <Navigate to='/login'/>

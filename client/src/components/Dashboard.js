@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
 import { useLocation } from 'react-router-dom';
 import CreateFile from "./CreateDialog/CreateFile"
+import DisplayFiles from "./DisplayFiles"
+import { useAuth } from "../middlewares/Auth";
 const Dashboard= ()=>{
-
+    
+    const {ListDoc} = useAuth()
     let location = useLocation();
     const id= location.pathname.split("/")[2];
     const [loader , setLoader] = useState(true);
     const [dashboardData, setDashboardData] = useState(null);
     const [tab, setTab] = useState("All");
     const [create, setCreate] = useState(false);
+    const [filedata, setFileData] = useState("");
 
     const fetchInfo = async (id)=>{
         try {
@@ -29,13 +33,33 @@ const Dashboard= ()=>{
             return null;
         }
     }
+    const displayFiles = async () =>{
+        console.log("id is :", id)
+        if(tab==='All'){
+            var data= await ListDoc(id)
+            setFileData(data);
+            console.log("obtained data :", filedata)
+        } 
+        else {
 
+            // Shared file data 
+            //left to implement 
+            data= await ListDoc(id)
+            console.log("shared Files :", filedata)
+
+        }
+
+    }
+    useEffect(()=>{
+        displayFiles()
+    }, [tab, dashboardData])
     useEffect(()=>{
         const fetchData = async () => {
             const data = await fetchInfo(id);
             console.log("dashboard data:", data);
         };
         fetchData();
+    
     }, [id]);
     
     
@@ -68,17 +92,22 @@ const Dashboard= ()=>{
                         <p>Shared Files</p>
                         {
                             tab==='Shared' &&
-                                <div className="h-1 w-full bg-blue-600 my-2" ></div>                                
+                                <div className="h-1 w-full bg-blue-600 my-2" ></div>
+                                                             
                          }
                         {/* <div className="h-1 w-full bg-blue-600 my-2"></div> */}
+                       
                      </div>
+                 </div>
+                 <div>
+                 <DisplayFiles data={filedata}/>
                  </div>
             </section>
         </div>
 
         }
         {
-            create ? <CreateFile setFunction={setCreate}/>:<div></div>
+            create ? <CreateFile files={filedata}/>:<div></div>
         }
         
         </div>

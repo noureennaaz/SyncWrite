@@ -12,8 +12,8 @@ exports.auth= (req, res)=>{
       const token=req.cookies.token || req.body.token || req.header("Authorization").replace("Bearer ", "") || "";
       console.log("from cookies:",req.cookies.token)
       if(!token || token ===""){
-          return res.status(200).json({
-              success:true,
+          return res.status(400).json({
+              success:false,
               login:false,
               message: "Not loggedin",
               id:""
@@ -35,8 +35,8 @@ exports.auth= (req, res)=>{
           
       }
       catch(err){
-          return res.status(200).json({
-              success:true,
+          return res.status(300).json({
+              success:false,
               login:false,
               message:"Token invalid",
               id:"",
@@ -60,8 +60,9 @@ exports.auth= (req, res)=>{
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
-
+    console.log(email , password)
     if (!email || !password) {
+      
       return res.status(400).json({
         success: false,
         message: "Please fill all the details",
@@ -163,6 +164,8 @@ exports.sendOTP = async (req, res) => {
 
 
 exports.signup = async (req, res) => {
+
+  
   try {
     const {
       fname,

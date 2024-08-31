@@ -2,11 +2,11 @@ const mongoose= require('mongoose')
 
 const FileModel =mongoose.Schema(
     {
-        Owners:[{
-            type:mongoose.Schema.Types.ObjectId,
-            ref:'User',
-            required:true
-        }],
+        // Owners:[{
+        //     type:mongoose.Schema.Types.ObjectId,
+        //     ref:'User',
+        //     required:true
+        // }],
         Title:{
             type:String,
             default:'Untitled',

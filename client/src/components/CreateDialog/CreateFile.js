@@ -3,9 +3,15 @@ import image from "../../assets/gifDoc1.gif"
 import { IoMdClose } from "react-icons/io";
 import { useLocation } from 'react-router-dom';
 import { useForm } from "react-hook-form";
+import { useDoc } from "../../middlewares/Doc";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateFile({setFunction}){
-
+    
+    const navigate =useNavigate()
+	const {createDoc} = useDoc();
     let location = useLocation();
 	const id= location.pathname.split("/")[2];
     const { register, handleSubmit } = useForm({
@@ -14,62 +20,49 @@ export default function CreateFile({setFunction}){
 	
 	  const onSubmit = async (data) => {
 
-		console.log(data);
-		data.id=id;
-		console.log(data);
-		// try {
-		//   const response = await login(data);
-		//   const id = response.user._id;
-		//   console.log(response);
+		
+		try {
+		 data.id=id;
+		  const response = await createDoc(data)
+		  
+		  console.log(response);
+		  const doc = response.newDoc._id;
 	
-		//   if (response.success) {
-		// 	toast.success("Login successful!", {
-		// 	  position: "bottom-right",
-		// 	  autoClose: 5000,
-		// 	  hideProgressBar: false,
-		// 	  closeOnClick: true,
-		// 	  pauseOnHover: true,
-		// 	  draggable: true,
-		// 	  progress: undefined,
-		// 	  theme: "light",
-		// 	});
-		// 	console.log("id is :", id)
-		// 	const navlink = `/dashboard/${id}`;
-		// 	console.log(navlink);
-		// 	console.log("L0");
-		// 	setIsLoggedIn(id);
-		// 	console.log("L1");
-		// 	setLoggedIn(id)
+		  if (response.success) {
+			toast("Document created", {
+			  position: "bottom-right",
+			  autoClose: 5000,
+			  hideProgressBar: false,
+			  closeOnClick: true,
+			  pauseOnHover: true,
+			  draggable: true,
+			  progress: undefined,
+			  theme: "light",
+			});
+			console.log("doc id is :", doc)
+			const navlink = `/doc/${doc}`;
+			console.log(navlink);
+			console.log("about to pass Navlink")
+			navigate(navlink);
+			console.log("passed Navlink")
+		  } 
+		  else {
+			console.log("Document creation failed")
 			
-		// 	console.log("about to pass Navlink")
-		// 	navigate(navlink);
-		// 	console.log("passed Navlink")
-		//   } 
-		//   else {
-		// 	toast.error("Enter correct credentials", {
-		// 	  position: "top-right",
-		// 	  autoClose: 5000,
-		// 	  hideProgressBar: false,
-		// 	  closeOnClick: true,
-		// 	  pauseOnHover: true,
-		// 	  draggable: true,
-		// 	  progress: undefined,
-		// 	  theme: "light",
-		// 	});
-		//   }
-		// } catch (err) {
-		//   console.log("failure while logging");
-		//   toast.error("Enter correct credentials", {
-		// 	position: "top-right",
-		// 	autoClose: 5000,
-		// 	hideProgressBar: false,
-		// 	closeOnClick: true,
-		// 	pauseOnHover: true,
-		// 	draggable: true,
-		// 	progress: undefined,
-		// 	theme: "light",
-		//   });
-		// }
+		  }
+		} catch (err) {
+		  console.log("failure while logging", err);
+		  toast.error("Enter correct credentials", {
+			position: "top-right",
+			autoClose: 5000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: "light",
+		  });
+		}
 	  };
     return(
         <div className="bg-black/10 backdrop-grayscale backdrop-blur-sm flex-col w-screen min-h-screen absolute z-50 top-0 right-0 justify-center flex items-center">

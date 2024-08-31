@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 
 function App() {
    const navigate = useNavigate();
-  const socket= useMemo(()=>io("http://localhost:3000"))
+  // const socket= useMemo(()=>io("http://localhost:3000"))
   const { isLoggedIn, login, logout } = useAuth();
   const privateRoute = ({ isloggedin, children }) => {
     if (!isloggedin) {
@@ -36,12 +36,13 @@ function App() {
           <Route path="/signup" element={<privateRoute isloggedin={isLoggedIn}><SignUp/></privateRoute>}></Route>
           <Route path="/login" element={<privateRoute isloggedin={isLoggedIn}><Login/></privateRoute>}></Route>
           <Route path="/dashboard/:id" element={
-            <PrivateRoute loggedIn={isLoggedIn}>
+            <PrivateRoute >
               <Dashboard/>
             </PrivateRoute>
               }>
 
           </Route>
+          <Route path="/doc/:docid" element={<FilePage/>}/>
           <Route path='*' element={<div>Page Not Found</div>}></Route>
         </Route>
         

@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../middlewares/Auth";
 import { toast } from "react-toastify";
@@ -8,7 +8,7 @@ import OTPVerifier from "./OTPVerifier";
 
 const SignUp = () => {
   const { isLoggedIn, sendOTP } = useAuth();
-
+  const navigate = useNavigate();
   const [submitted, setSubmit] = useState(false);
 
   const { register, handleSubmit } = useForm({
@@ -54,7 +54,7 @@ const SignUp = () => {
       console.log(response);
 
       if (response.success) {
-        setSubmit(data)
+        setSubmit(data);
         toast.success("OTP sent to your email", {
           position: "bottom-right",
           autoClose: 5000,
@@ -72,7 +72,7 @@ const SignUp = () => {
         // console.log(navlink);
 
         console.log("about to pass Navlink");
-        // navigate(navlink);
+        // navigate("/");
         console.log("passed Navlink");
       } else {
         toast.error("Enter correct credentials", {

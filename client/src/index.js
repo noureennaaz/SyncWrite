@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./middlewares/Auth";
+import { DocProvider } from "./middlewares/Doc";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -11,7 +12,10 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <AuthProvider>
+      <DocProvider>
       <App />
+      
+      </DocProvider>
     </AuthProvider>
     <ToastContainer
       position="bottom-right"
