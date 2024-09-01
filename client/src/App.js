@@ -5,6 +5,7 @@ import Login  from './components/login';
 import Home from "./Pages/Home";
 import FilePage from './components/FilePage';
 import PrivateRoute from './components/PrivateRoute';
+import  NotFound from "./Pages/NotFound"
 import {io} from 'socket.io-client';
 import { Route, Routes, useLocation, useSearchParams } from "react-router-dom";
 import { useEffect , useMemo, useState } from 'react';
@@ -43,7 +44,7 @@ function App() {
 
           </Route>
           <Route path="/doc/:docid" element={<FilePage/>}/>
-          <Route path='*' element={<div>Page Not Found</div>}></Route>
+          <Route path='*' element={<NotFound/>}></Route>
         </Route>
         
       </Routes>

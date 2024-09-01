@@ -72,7 +72,9 @@ const Dashboard= ()=>{
                     <button className="group shadow-2xl py-2 px-7 text-xl flex rounded-[20px] border border-slate-300 text-slate-700 font-semibold gap-1 hover:border-blue-600 " onClick={()=>setCreate(true)}> <div className="font-bold leading-6 text-blue-600 group-hover:rotate-90 group-hover:translate-y-[3px] group-hover:translate-x-[3px] text-2xl transition-all duration-100">+ </div> Create </button>
                     <span className="flex gap-2">
                         <span className="rounded-full w-9 h-9">
-                           <img src={dashboardData.image} className="object-cover rounded-full"/>
+                        {
+                           dashboardData.image && <img src={dashboardData.image} className="object-cover rounded-full"/> 
+                        }
                         </span>
                         <div className="text-lg text-slate-500 uppercase">{dashboardData.fname} {dashboardData.lname}</div>
                     </span>

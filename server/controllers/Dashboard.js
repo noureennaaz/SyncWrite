@@ -3,7 +3,6 @@ const File= require("../models/Files")
 exports.loadDashboard = async (req, res) => {
     try{
 
-        console.log(req.body);
 
         const id = req.body.id;
         const info = await Users.findById(id)
@@ -16,8 +15,7 @@ exports.loadDashboard = async (req, res) => {
         // .populate({
         //     path:"viewOnlyFiles"
         // });
-        console.log("the info is :");
-        console.log(info);
+     
         if(!info){
            
             return res.status(400).json({
@@ -44,13 +42,20 @@ exports.loadFiles= async (req, res) =>{
 
     try{
         const id = req.body.id;
-        console.log(id)
-        const files = await File.find({ CreatedBy: id }, 'Title lastUpdatedAt');
-
-        console.log(files, ": files");
-        console.log("the info is :");
-        console.log(files);
-        if(!files){
+        const files = await File.find({ CreatedBy: id }, 'Title lastUpdatedAt').sort({ lastUpdatedAt: -1 });
+        
+        const filesWithSizes = files.map(doc => {
+            const docObject = doc.toObject(); // Convert Mongoose document to plain object
+            const docSize =require('mongodb').BSON.calculateObjectSize(docObject);
+            return {
+                _id: doc._id,
+                Title: doc.Title,
+                lastUpdatedAt: doc.lastUpdatedAt,
+                size: docSize
+            };
+        });
+        console.log("size : ",filesWithSizes)
+        if(!files || !filesWithSizes){
            
             return res.status(400).json({
                 success:false, 
@@ -60,7 +65,7 @@ exports.loadFiles= async (req, res) =>{
         return res.status(200).json({
             success:false, 
             message:"fetch successful",
-            data:files
+            data:filesWithSizes
         })
 
     } catch (err) {

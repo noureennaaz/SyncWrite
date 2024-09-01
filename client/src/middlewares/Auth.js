@@ -39,10 +39,14 @@ export const AuthProvider = ({ children }) => {
         if (!response.ok) {
           throw new Error("Network response error");
         }
-  
-        const result = await response.json();
-        setIsLoggedIn(result.user._id);
-        return result;
+        
+        if(response.status){
+          const result = await response.json();
+          setIsLoggedIn(result.user._id);
+          return result;
+
+        }
+        
       } catch (err) {
         console.error("Login failed:", err);
       }

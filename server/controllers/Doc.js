@@ -1,12 +1,10 @@
 const Users = require("../models/User");
 const Files = require("../models/Files")
 exports.CreateDoc = async (req, res) => {
-  console.log(req.body);
-  try {
-    
+ 
+  try {  
     const {title  , isPublic , id} = req.body;
     
-
     if(!id){
       return res.status(404).json({
         success: false,

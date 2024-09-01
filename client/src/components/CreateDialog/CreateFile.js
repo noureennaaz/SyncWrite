@@ -41,12 +41,19 @@ export default function CreateFile({setFunction}){
 			});
 			console.log("doc id is :", doc)
 			const navlink = `/doc/${doc}`;
-			console.log(navlink);
-			console.log("about to pass Navlink")
 			navigate(navlink);
-			console.log("passed Navlink")
 		  } 
 		  else {
+			toast.error("problem occured while creating document", {
+				position: "bottom-right",
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "light",
+			  });
 			console.log("Document creation failed")
 			
 		  }

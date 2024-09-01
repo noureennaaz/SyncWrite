@@ -110,7 +110,7 @@ exports.login = async (req, res) => {
       });
   } catch (err) {
     console.error(err);
-    res.status(400).json({
+    res.status(500).json({
       success: false,
       message: "Login Failed, try again",
     });
@@ -120,8 +120,43 @@ exports.login = async (req, res) => {
 
 exports.sendOTP = async (req, res) => {
   try {
-    const { email } = req.body;
+     
+    const {
+      fname,
+      lname,
+      email,
+      password,
+      confirmPassword,
+    } = req.body;
+
+    if (
+      !fname ||
+      !lname ||
+      !email ||
+      !password ||
+      !confirmPassword 
+    ) {
+      return res.status(200).json({
+        success: false,
+        message: "Please fill all the details",
+      });
+    }
+    if (password !== confirmPassword) {
+      return res.status(200).json({
+        success: false,
+        message: "Passwords does not match",
+      });
+    }
    
+   
+    const existingUser = await User.findOne({ email });
+    
+    if (existingUser) {
+      return res.status(200).json({
+        success: false,
+        message: "Email is already in use",
+      });
+    }
     var otp = otpgenerator.generate(4, {
       upperCaseAlphabets: false,
       specialChars: false,

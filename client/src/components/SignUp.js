@@ -75,7 +75,7 @@ const SignUp = () => {
         // navigate("/");
         console.log("passed Navlink");
       } else {
-        toast.error("Enter correct credentials", {
+        toast.error(response.message, {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
