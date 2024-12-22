@@ -8,22 +8,24 @@ export const AuthProvider = ({ children }) => {
     const fetchData = async () => {
       try {
         const response = await fetch("http://localhost:4000/api/v1/user/", {
-          credentials: "same-origin", 
+          method: 'POST',
         });
+    
         if (!response.ok) {
-          return "";
+          console.error("Failed to fetch data, status code:", response.status);
+          return ""; // Return an empty string if the response is not successful
         }
-        else{
-          const result = await response.json();
-          return result.id;
-        }
-        return isLoggedIn;
-        
+    
+        const result = await response.json();
+        console.log(result, " : obtained");
+        return result.id; // Return the ID from the response if successful
+    
       } catch (error) {
         console.error("Error fetching data:", error);
-        return "";
+        return ""; // Return an empty string if there is an error during fetch
       }
     };
+    
     
 
     const login = async (params) => {
@@ -39,14 +41,10 @@ export const AuthProvider = ({ children }) => {
         if (!response.ok) {
           throw new Error("Network response error");
         }
-        
-        if(response.status){
-          const result = await response.json();
-          setIsLoggedIn(result.user._id);
-          return result;
-
-        }
-        
+  
+        const result = await response.json();
+        setIsLoggedIn(result.user._id);
+        return result;
       } catch (err) {
         console.error("Login failed:", err);
       }

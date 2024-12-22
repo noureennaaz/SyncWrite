@@ -6,54 +6,56 @@ const jwt = require("jsonwebtoken");
 const SendMail = require("../utils/SendMail");
 require("dotenv").config();
 
-exports.auth= (req, res)=>{
-  try{
-    
-      const token=req.cookies.token || req.body.token || req.header("Authorization").replace("Bearer ", "") || "";
-      console.log("from cookies:",req.cookies.token)
-      if(!token || token ===""){
-          return res.status(400).json({
-              success:false,
-              login:false,
-              message: "Not loggedin",
-              id:""
-          })
-      }
-      else{
-        try{
-          
-          const decode=jwt.verify(token, process.env.JWT_SECRET);
-          
-          console.log(decode);
+exports.auth = (req, res) => {
+  try {
+    console.log("Entered auth:");
 
-          return res.status(200).json({
-            success:true,
-            login:true,
-            id:decode.id,
-            message: "User already loggedIn"
-        })
-          
-      }
-      catch(err){
-          return res.status(300).json({
-              success:false,
-              login:false,
-              message:"Token invalid",
-              id:"",
-          })
-      }
+    // Extract token from cookies, body, or header
+    const token = req.cookies.token || req.body.token || req.header("Authorization")?.replace("Bearer ", "");
 
+    console.log("Token from cookies:", req.cookies.token);
 
-      }
-      
+    // If no token is found
+    if (!token) {
+      return res.status(401).json({
+        success: false,
+        login: false,
+        message: "Not logged in",
+        id: ""
+      });
+    }
 
-  } catch(err){
+    // If token is found, verify it
+    try {
+      console.log("Moving to decode");
+
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      console.log("ID decoded from token:", decoded);
+
       return res.status(200).json({
-          success:true,
-          message: "Problem occured in fetching user state",
-          id:""
-      })
+        success: true,
+        login: true,
+        id: decoded.id,
+        message: "User already logged in"
+      });
 
+    } catch (err) {
+      // Handle invalid token
+      return res.status(401).json({
+        success: false,
+        login: false,
+        message: "Invalid token",
+        id: ""
+      });
+    }
+
+  } catch (err) {
+    // Handle other errors
+    return res.status(500).json({
+      success: false,
+      message: "Problem occurred in fetching user state",
+      id: ""
+    });
   }
 };
 
@@ -95,7 +97,7 @@ exports.login = async (req, res) => {
     user = user.toObject();
     user.token = token;
     user.password = undefined;
-    console.log(user)
+    console.log("login controller data : " , user)
     res
       .cookie("token", token, {
         expire: new Date(Date.now() + 1000 * 3 * 24 * 60 * 60),

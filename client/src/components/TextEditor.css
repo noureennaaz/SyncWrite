@@ -67,5 +67,12 @@
         padding:0;
 
     }
-    
  }
+
+ .ql-syntax{
+    padding: 60px 30px 60px 30px !important;
+    border-radius: 20px !important;
+    background: linear-gradient(to right, #090924,#1a2637, #121e3c) !important;
+  
+ }
+ 

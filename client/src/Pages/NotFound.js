@@ -1,11 +1,13 @@
 import image from "../assets/notfound.webp"
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
 const NotFound = () => {
     const navigate= useNavigate()
     return(
-        <div className="w-screen h-screen flex flex-col justify-center items-center">
-            <div className="flex flex-col justify-between">
-                <div>
+        <div className="w-screen h-screen flex flex-col bg-slate-600 justify-center items-center">
+            <Navbar/>
+            <div className="flex flex-col mt-40 h-[30vh]">
+                <div className="h-60 w-60">
                     <img src={image} alt =""/>
                 </div>
                 <div className="text-gray-400 text-5xl font-bold text-center"> 4<span className="text-slate-500">04</span></div>

@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import CreateFile from "./CreateDialog/CreateFile"
 import DisplayFiles from "./DisplayFiles"
 import { useAuth } from "../middlewares/Auth";
+import Navbar from "./Navbar"
 const Dashboard= ()=>{
     
     const {ListDoc} = useAuth()
@@ -64,37 +65,38 @@ const Dashboard= ()=>{
     
     
     return(
-        <div className="w-screen min-h-screen relative top-0 right-0 flex flex-col">
+        <div className="min-w-screen min-h-screen relative top-0 right-0 flex flex-col mt-20">
         {
             loader? <div className="self-center justify-self-center">Loading........</div> : <div className="m-0 p-0 min-h-screen w-screen">
+            <Navbar/>
             <header >
-                <div className="bg-slate-100 flex justify-between px-20 py-5" >
-                    <button className="group shadow-2xl py-2 px-7 text-xl flex rounded-[20px] border border-slate-300 text-slate-700 font-semibold gap-1 hover:border-blue-600 " onClick={()=>setCreate(true)}> <div className="font-bold leading-6 text-blue-600 group-hover:rotate-90 group-hover:translate-y-[3px] group-hover:translate-x-[3px] text-2xl transition-all duration-100">+ </div> Create </button>
+                <div className="bg-slate-900 justify-between md:flex hidden lg:px-20 py-5" >
+                    <button className="group shadow-2xl py-2 px-7 text-xl flex rounded-[20px] border border-slate-300 text-white font-semibold gap-1 hover:border-blue-600 " onClick={()=>setCreate(true)}> <div className="font-bold leading-6 text-slate-400 group-hover:rotate-90 transition-transform duration-300 group-hover:translate-y-[3px] group-hover:translate-x-[3px] text-2xl">+ </div> Create </button>
                     <span className="flex gap-2">
                         <span className="rounded-full w-9 h-9">
                         {
                            dashboardData.image && <img src={dashboardData.image} className="object-cover rounded-full"/> 
                         }
                         </span>
-                        <div className="text-lg text-slate-500 uppercase">{dashboardData.fname} {dashboardData.lname}</div>
+                        <div className="text-lg text-slate-300 uppercase">{dashboardData.fname} {dashboardData.lname}</div>
                     </span>
                 </div>
                 
             </header>
-            <section>
-                 <div className="flex py-2 px-16 gap-10 ">
+            <section className="bg-gradient-to-r from-slate-900 to-slate-700 flex-1">
+                 <div className="flex py-2 px-16 gap-10 text-white ">
                      <div className="w-20 cursor-pointer"  onClick={()=>{setTab("All")}}>
                          <p>My Files</p>
                          {
                             tab==='All' &&
-                                <div className="h-1 w-full bg-blue-600 my-2" ></div>      
+                                <div className="h-1 w-full bg-gradient-to-r from-amber-600 via-orange-500 my-2" ></div>      
                          }
                       </div>
                      <div className="w-24 cursor-pointer" onClick={()=>{setTab("Shared")}}>
                         <p>Shared Files</p>
                         {
                             tab==='Shared' &&
-                                <div className="h-1 w-full bg-blue-600 my-2" ></div>
+                            <div className="h-1 w-full bg-gradient-to-r from-amber-600 via-orange-500 my-2" ></div> 
                                                              
                          }
                         {/* <div className="h-1 w-full bg-blue-600 my-2"></div> */}
@@ -109,7 +111,7 @@ const Dashboard= ()=>{
 
         }
         {
-            create ? <CreateFile files={filedata}/>:<div></div>
+            create ? <CreateFile files={filedata} setCreate={setCreate}/>:<div></div>
         }
         
         </div>

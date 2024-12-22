@@ -8,7 +8,7 @@
     gap: 30px;
     align-items: center;
     border-radius: 15px;
-    background-color: white;
+    background-color: #151515;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     transition: .4s ease-in-out;
   }
@@ -38,24 +38,24 @@
     border-radius: 5px;
     border: none;
     outline: none;
-    background-color: rgb(235, 235, 235);
-    box-shadow: inset 3px 3px 6px #d1d1d1,
-              inset -3px -3px 6px #ffffff;
-   
+    background-color: rgb(30, 28, 28);
+    box-shadow: inset 3px 3px 6px #110b0b,
+              inset -3px -3px 6px #000000;
+    color: antiquewhite;
     text-align: center;
     transition: .4s ease-in-out;
   }
   
   .input:hover {
-    box-shadow: inset 0px 0px 0px #d1d1d1,
-              inset 0px 0px 0px #ffffff;
-    background-color: lightgrey;
+    /* box-shadow: inset 0px 0px 0px #433b3b,
+              inset 0px 0px 0px #1b1313; */
+    background-color: rgb(45, 38, 38);
   }
   
   .input:focus {
-    box-shadow: inset 0px 0px 0px #d1d1d1,
-              inset 0px 0px 0px #ffffff;
-    background-color: lightgrey;
+    box-shadow: inset 0px 0px 0px #352727,
+              inset 0px 0px 0px #3e3232;
+    background-color: rgba(44, 33, 33, 0.868);
   }
   
   .btn1 {
@@ -63,7 +63,6 @@
     
     width: 17em;
     height: 3em;
-    border-radius: 5px;
     border: none;
     outline: none;
     transition: .4s ease-in-out;

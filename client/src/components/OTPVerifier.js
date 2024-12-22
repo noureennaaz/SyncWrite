@@ -4,12 +4,13 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { useAuth } from "../middlewares/Auth";
 import { toast } from "react-toastify";
+import { IoMdClose } from "react-icons/io";
 
 export default function OTPVerifier (props){
 
     const {signup } = useAuth();
     const navigate = useNavigate();
-    var userInfo = props.userData;
+    var userInfo = props.submitState;
     
     const { register, handleSubmit } = useForm({
         shouldUseNativeValidation: true,
@@ -101,48 +102,17 @@ export default function OTPVerifier (props){
       }
 
     return (
-        <div className="bg-white/10 backdrop-grayscale backdrop-blur-sm flex-col gap-10 w-full h-full absolute z-50 top-0 right-0 justify-center flex items-center">
+        <div className="bg-white/10 backdrop-blur-[3px] flex-col gap-10 w-full h-full absolute z-50 top-0 right-0 justify-center flex items-center">
           
-            <form class="form" onSubmit={handleSubmit(onSubmit)}>
-              <p class="heading">Verify</p>
-              <svg
-                class="check"
-                version="1.1"
-                id="Layer_1"
-                xmlns="http://www.w3.org/2000/svg"
-                xlink="http://www.w3.org/1999/xlink"
-                x="0px"
-                y="0px"
-                width="60px"
-                height="60px"
-                viewBox="0 0 60 60"
-                space="preserve"
-              >
-                {" "}
-                <image
-                  id="image0"
-                  width="60"
-                  height="60"
-                  x="0"
-                  y="0"
-                  href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAQAAACQ9RH5AAAABGdBTUEAALGPC/xhBQAAACBjSFJN
-AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAJcEhZ
-cwAACxMAAAsTAQCanBgAAAAHdElNRQfnAg0NDzN/r+StAAACR0lEQVRYw+3Yy2sTURTH8W+bNgVf
-aGhFaxNiAoJou3FVEUQE1yL031BEROjCnf4PLlxILZSGYncuiiC48AEKxghaNGiliAojiBWZNnNd
-xDza3pl77jyCyPzO8ubcT85wmUkG0qT539In+MwgoxQoUqDAKDn2kSNLlp3AGi4uDt9xWOUTK3xg
-hVU2wsIZSkxwnHHGKZOxHKfBe6rUqFGlTkPaVmKGn6iYao1ZyhK2zJfY0FZ9ldBzsbMKxZwZjn/e
-5szGw6UsD5I0W6T+hBhjUjiF7bNInjz37Ruj3igGABjbtpIo3GIh30u4ww5wr3fwfJvNcFeznhBs
-YgXw70TYX2bY/ulkZhWfzfBbTdtrzjPFsvFI+T/L35jhp5q2owDs51VIVvHYDM9sa/LY8XdtKy1l
-FXfM8FVN2/X2ajctZxVXzPA5TZvHpfb6CFXxkerUWTOcY11LX9w0tc20inX2mmF4qG3upnNWrOKB
-hIXLPu3dF1x+kRWq6ysHpkjDl+7eQjatYoOCDIZF3006U0unVSxIWTgTsI3HNP3soSJkFaflMDwL
-3OoHrph9YsPCJJ5466DyOGUHY3Epg2rWloUxnMjsNw7aw3AhMjwVhgW4HYm9FZaFQZ/bp6QeMRQe
-hhHehWKXGY7CAuSpW7MfKUZlAUqWdJ3DcbAAB3guZl9yKC4WYLfmT4muFtgVJwvQx7T2t0mnXK6J
-XlGGyAQvfNkaJ5JBmxnipubJ5HKDbJJsM0eY38QucSx5tJWTVHBwqDDZOzRNmn87fwDoyM4J2hRz
-NgAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMy0wMi0xM1QxMzoxNTo1MCswMDowMKC8JaoAAAAldEVY
-dGRhdGU6bW9kaWZ5ADIwMjMtMDItMTNUMTM6MTU6NTArMDA6MDDR4Z0WAAAAKHRFWHRkYXRlOnRp
-bWVzdGFtcAAyMDIzLTAyLTEzVDEzOjE1OjUxKzAwOjAwIIO3fQAAAABJRU5ErkJggg=="
-                ></image>
-              </svg>
+            <form className="form relative" onSubmit={handleSubmit(onSubmit)} >
+              <button className="absolute top-5 right-5 flex justify-center items-center transition ease-in-out duration-75 hover:bg-slate-100 h-10 w-10 rounded-full " onClick={()=>userInfo(false)}>
+                <IoMdClose color="#94a3b8" size={20}/>
+              </button>
+
+              <p class="heading relative">Verify</p>
+              <div className="h-28 w-28">
+                <img src="https://miro.medium.com/v2/resize:fit:450/1*2wlF_2-UesCiTP699Mrd6w.png" alt = ""/>
+              </div>
               
               <div class="box">
                 <input class="input" type="text" required="true" maxlength="1" onKeyDown={handleEnter} onChange={(e)=>{if(e.target.value.length===1) HandleFill(e)}} onKeyUp={handleBackSpace} {...register("val1")}/>
@@ -151,11 +121,11 @@ bWVzdGFtcAAyMDIzLTAyLTEzVDEzOjE1OjUxKzAwOjAwIIO3fQAAAABJRU5ErkJggg=="
                 <input class="input" type="text" required="true" maxlength="1" onKeyUp={handleBackSpace} {...register("val4")}/>
               </div>
               
-              <button class="btn1">Submit</button>
-              <button class="btn2">Back</button>
+              <button class="btn1"  className="w-[250px] py-3 px-8 text-white text-base font-semibold overflow-hidden rounded-full transition-all duration-400 ease-in-out shadow-md hover:text-bold hover:shadow-lg active:scale-90 before:absolute before:top-0 before:-left-full before:w-[300px] before:h-full bg-gradient-to-tl from-orange-600 to-orange-500 before:transition-all before:duration-500 before:ease-in-out before:z-[-1] before:rounded-full hover:before:left-0 "
+              >Submit</button>
               
             </form>
-            <p className="h-0 -translate-y-5 text-gray-500">Enter otp sent to your email</p>
+            <p className="h-0 -translate-y-5 text-slate-500">Enter otp sent to your email</p>
         </div>
     )
 }

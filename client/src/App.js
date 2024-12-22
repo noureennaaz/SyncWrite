@@ -11,7 +11,7 @@ import { Route, Routes, useLocation, useSearchParams } from "react-router-dom";
 import { useEffect , useMemo, useState } from 'react';
 import { useAuth } from './middlewares/Auth';
 import { useNavigate } from 'react-router-dom';
-
+// import Quillbuild1 from './components/quilldemo/Quillbuild1';
 
 function App() {
    const navigate = useNavigate();
@@ -43,10 +43,11 @@ function App() {
               }>
 
           </Route>
+          {/* adding protected route to doc is left*/}
           <Route path="/doc/:docid" element={<FilePage/>}/>
           <Route path='*' element={<NotFound/>}></Route>
         </Route>
-        
+        {/* <Route path='/test' element={<Quillbuild1/>}></Route> */}
       </Routes>
     
   

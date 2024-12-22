@@ -14,7 +14,6 @@ root.render(
     <AuthProvider>
       <DocProvider>
       <App />
-      
       </DocProvider>
     </AuthProvider>
     <ToastContainer
