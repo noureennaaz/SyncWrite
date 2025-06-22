@@ -3,20 +3,54 @@ import { useForm } from "react-hook-form";
 import { useAuth } from "../middlewares/Auth";
 import { toast } from "react-toastify";
 import { IoArrowBack } from "react-icons/io5";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import "./otpStyle.css";
 import OTPVerifier from "./OTPVerifier";
 import ScreenVid from "../assets/devicesGif.gif";
 import "./inputStyle.css";
 
 const SignUp = () => {
-  const { isLoggedIn, sendOTP } = useAuth();
+  const { setIsLoggedIn, isLoggedIn, sendOTP, fetchData } = useAuth();
   const navigate = useNavigate();
   const [submitted, setSubmit] = useState(false);
 
   const { register, handleSubmit } = useForm({
     shouldUseNativeValidation: true,
   });
+  const { isAuthenticated } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate(`/dashboard/${isLoggedIn}`);
+    }
+  }, [isAuthenticated, navigate]);
+ 
+  const [LoggedIn, setLoggedIn] = useState(null);
+  const [loader, setLoader] = useState(true);
+  useEffect(() => {
+    const checkStatus = async () => {
+      const loggedIn = await fetchData();
+      if (loggedIn) {
+        setLoggedIn(loggedIn.id);
+        setIsLoggedIn(loggedIn.id);
+        toast.info(" User alrady loggedIn", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        navigate(`/dashboard/${isLoggedIn}`);
+      } else {
+        setLoader(false);
+      }
+    };
+    checkStatus();
+  }, []);
 
   function handleEnter(event) {
     if (event.keyCode === 13 || event.keyCode === 39) {

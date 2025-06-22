@@ -50,21 +50,18 @@ const Modules = {
         container: TOOLBAR_OPTIONS,
         handlers: {
             'code-block': function() {
-
                 const range = this.quill.getSelection();
                 if (range) {
                     const language = 'javascript'; // Use the selected language
                     this.quill.insertEmbed(range.index, 'code-block', { language });
+                    // this.quill.insertEmbed(0, 'code-container', '<div className = "code-container"><div/>');
                     this.quill.setSelection(range.index + 1);
-
-                    console.log("THe quill in modules ::", this.quill)
                 }
+                // console.log(this.quill)
 
-                //made apper inside a parent div
-                
+                // console.log(this.quill.addContainer.length)
             },
             // Define a custom handler for code-language if needed
-
         }
     },
     syntax: {
@@ -145,7 +142,8 @@ export default function TextEditor({ id, text }) {
                 value={quillText}
                 modules={Modules}
                 formats={formats}
-                className="relative"
+                id='doc-container'
+                className="relative z-0"
                 onChange={ChangeHandler}
                 preserveWhitespace
             />

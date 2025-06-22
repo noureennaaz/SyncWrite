@@ -71,19 +71,35 @@ exports.login = async (req, res) => {
       });
     }
 
+
+    const Existingtoken = req.cookies.token || req.header("Authorization")?.replace("Bearer ", "");
+      
+    if (Existingtoken) {
+      try {
+        const decoded = jwt.verify(Existingtoken, process.env.JWT_SECRET);
+        console.log("Entered the verification of already logged in")
+        console.log("And your're already loggedin", decoded)
+        return res.status(200).json({
+          success: true,
+          user:decoded,
+          message: "Already logged in",
+        });
+      } catch (err) {}
+    } 
+
     var user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(400).json({
+      return res.status(404).json({
         success: false,
-        message: "User not found, try signing in first",
+        message: "User Not Found, try sign up",
       });
     }
     
     if (!(await bcrypt.compare(password, user.password))) {
-      return res.status(400).json({
+      return res.status(401).json({
         success: false,
-        message: "Wrong Password",
+        message: "Incorrect Credentials",
       });
     }
     const payload = {
@@ -100,13 +116,13 @@ exports.login = async (req, res) => {
     console.log("login controller data : " , user)
     res
       .cookie("token", token, {
-        expire: new Date(Date.now() + 1000 * 3 * 24 * 60 * 60),
+        expires: new Date(Date.now() + 1000 * 3 * 24 * 60 * 60),
         httpOnly: true,
       })
       .status(200)
       .json({
         success: true,
-        message: "Successfully logged in",
+        message: "Login Successful!",
         token,
         user,
       });

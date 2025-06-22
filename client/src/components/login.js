@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import "./inputStyle.css"
 import { IoArrowBack } from "react-icons/io5";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useAuth } from "../middlewares/Auth";
 import { toast } from "react-toastify";
 import ScreenVid from "../assets/devicesGif.gif";
@@ -11,7 +12,15 @@ import Navbar from "./Navbar";
 
 const Login = () => {
   const { fetchData, login, logout, isLoggedIn, setIsLoggedIn } = useAuth();
+  const { isAuthenticated } = useSelector((state) => state.auth);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/dashboard");
+    }
+  }, [isAuthenticated, navigate]);
+ 
   const [LoggedIn, setLoggedIn] = useState(null);
   const [loader, setLoader] = useState(true);
   useEffect(() => {
@@ -45,11 +54,11 @@ const Login = () => {
   const onSubmit = async (data) => {
     try {
       const response = await login(data);
-      const id = response.user._id;
+      const id = response.user._id || response.user.id;
       console.log(response);
 
       if (response.success) {
-        toast.success("Login successful!", {
+        toast.success(response.message, {
           position: "bottom-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -67,11 +76,9 @@ const Login = () => {
         console.log("L1");
         setLoggedIn(id);
 
-        console.log("about to pass Navlink");
         navigate(navlink);
-        console.log("passed Navlink");
       } else {
-        toast.error("Enter correct credentials", {
+        toast.error(response.message , {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -83,8 +90,8 @@ const Login = () => {
         });
       }
     } catch (err) {
-      console.log("failure while logging");
-      toast.error("Enter correct credentials", {
+      console.log(err);
+      toast.error("Login Failed", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -129,7 +136,7 @@ const Login = () => {
               <div>
                 <p className="text-slate-400 pt-5 pb-3 font-medium text-base">
                   New User..?{" "}
-                  <NavLink to={`/signup`} className=" pl-4 text-amber-600">
+                  <NavLink to={`/signup`} className=" hover:text-amber-900 transition-colors pl-4 text-amber-600">
                     {" "}
                     SignUp{" "}
                   </NavLink>
@@ -179,7 +186,12 @@ const Login = () => {
                 Login
               </button>
               </div>
+              <div className="text-slate-400 pt-5 pb-3 font-medium text-sm">
+              Forget Password ? 
+                <NavLink to="/forget_password" className=" pl-4 text-amber-600 underline hover:text-amber-900 transition-colors" >click here</NavLink>
+              </div>
             </form>
+            
           </div>
           <div className="lg:block hidden w-[600px] h-[98%]">
             <img

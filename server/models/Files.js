@@ -19,6 +19,7 @@ const FileModel =mongoose.Schema(
         CreatedBy:{
             type:mongoose.Schema.Types.ObjectId,
             ref:'User',
+            required:true
         },
         isPublic:{
             type:Boolean,

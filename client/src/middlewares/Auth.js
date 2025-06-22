@@ -3,35 +3,98 @@ import React, { createContext, useState, useEffect, useContext } from "react";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+    const BASE_URL = process.env.REACT_APP_BASE_URL;
+    const AUTH_ROUTES = process.env.REACT_APP_AUTH_ROUTES; 
+    const DOC_ROUTE = process.env.REACT_APP_DOC_ROUTES;
     const [isLoggedIn, setIsLoggedIn] = useState("");
 
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:4000/api/v1/user/", {
-          method: 'POST',
+        const response = await fetch(`${BASE_URL}/${AUTH_ROUTES}/checkAuth`, {
+          method: 'GET',
+          credentials: 'include', // Required to send cookies
+          headers: {
+            'Content-Type': 'application/json',
+          },
         });
     
         if (!response.ok) {
           console.error("Failed to fetch data, status code:", response.status);
-          return ""; // Return an empty string if the response is not successful
+          return ""; 
         }
     
         const result = await response.json();
         console.log(result, " : obtained");
-        return result.id; // Return the ID from the response if successful
+        setIsLoggedIn(result.id)
+        return result.id; 
     
       } catch (error) {
         console.error("Error fetching data:", error);
-        return ""; // Return an empty string if there is an error during fetch
+        setIsLoggedIn("")
+        return ""; 
+      }
+    };
+
+    const checkAuth = async () => {
+      try {
+
+        console.log("check auth called ")
+        const response = await fetch(`${BASE_URL}/${AUTH_ROUTES}/auth`, {
+          method: 'GET',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        console.log("check auth response obtained")
+        if (!response.ok) {
+          console.log("check auth invalid response obtained")
+          throw new Error('Unauthorized');
+        }
+       setIsLoggedIn(response._id)
+       console.log("response id after check ",response.id)
+       console.log("response check auth : ", response)
+        const data = await response.json();
+        console.log("Json data at check auth :", data);
+        return data;
+      } catch (error) {
+        console.log(error);
+        setIsLoggedIn(false);
+        throw new Error('Unauthorized');
       }
     };
     
+    const fetchUserInfo = async (id)=>{
+      try {
+          const response = await fetch(`${BASE_URL}/${AUTH_ROUTES}/userdetails/`, {
+              method: "POST",
+              credentials: 'include',
+              headers: {
+                  "Content-Type": "application/json",
+              },
+              body: JSON.stringify({"id": `${id}`}),
+          });
+          console.log(id)
+          const data = await response.json();
+          // setDashboardData(data.data);
+          // setLoader(false);
+          console.log("user detaillll", data)
+          return data.data;
+      } catch (error) {
+          console.error("Failed to fetch data:", error);
+          // setLoader(false);
+          return null;
+      }
+  }
     
 
     const login = async (params) => {
       try {
-        const response = await fetch("http://localhost:4000/api/v1/user/login", {
+
+        console.log(BASE_URL)
+        const response = await fetch(`${BASE_URL}/${AUTH_ROUTES}/login`, {
           method: "POST",
+          credentials: 'include',
           headers: {
             "Content-Type": "application/json",
           },
@@ -53,7 +116,7 @@ export const AuthProvider = ({ children }) => {
 
     const signup = async(params) =>{
       try{
-        const response= await fetch("http://localhost:4000/api/v1/user/signup", {
+        const response= await fetch(`${BASE_URL}/${AUTH_ROUTES}/signup`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -75,7 +138,7 @@ export const AuthProvider = ({ children }) => {
     
     const sendOTP = async(params) =>{
       try{
-        const response= await fetch("http://localhost:4000/api/v1/user/sendOTP", {
+        const response= await fetch(`${BASE_URL}/${AUTH_ROUTES}/sendOTP`, {
           method:"POST",
           headers: {
             "Content-Type": "application/json",
@@ -103,9 +166,9 @@ export const AuthProvider = ({ children }) => {
     const ListDoc= async (id)=>{
       try{
         
-          const response = await fetch("http://localhost:4000/api/v1/doc/loadFiles", {
+          const response = await fetch(`${BASE_URL}/${DOC_ROUTE}/loadFiles`, {
             method: "POST",
-            credentials:"same-origin",
+            credentials: 'include',
               headers: {
                 "Content-Type": "application/json",
               },
@@ -126,7 +189,7 @@ export const AuthProvider = ({ children }) => {
       }
      }
     return (
-      <AuthContext.Provider value={{ login, logout, fetchData, setIsLoggedIn, isLoggedIn, sendOTP, signup, ListDoc }}>
+      <AuthContext.Provider value={{ login, logout, fetchData, setIsLoggedIn, isLoggedIn, sendOTP, signup, ListDoc, checkAuth, fetchUserInfo }}>
         {children}
       </AuthContext.Provider>
     );

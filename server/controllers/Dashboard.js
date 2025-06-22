@@ -1,6 +1,6 @@
 const Users= require("../models/User");
 const File= require("../models/Files")
-exports.loadDashboard = async (req, res) => {
+exports.userdetails = async (req, res) => {
     try{
 
 
@@ -63,7 +63,7 @@ exports.loadFiles= async (req, res) =>{
             })
         }
         return res.status(200).json({
-            success:false, 
+            success:true, 
             message:"fetch successful",
             data:filesWithSizes
         })

@@ -4,13 +4,14 @@ import SignUp from './components/SignUp';
 import Login  from './components/login';
 import Home from "./Pages/Home";
 import FilePage from './components/FilePage';
-import PrivateRoute from './components/PrivateRoute';
+import AboutPage from "./Pages/AboutPage"
 import  NotFound from "./Pages/NotFound"
-import {io} from 'socket.io-client';
 import { Route, Routes, useLocation, useSearchParams } from "react-router-dom";
 import { useEffect , useMemo, useState } from 'react';
 import { useAuth } from './middlewares/Auth';
 import { useNavigate } from 'react-router-dom';
+import AuthProtectedRoute from './ProtectedRoutes/AuthProtected';
+// import AuthRedirectRoute from './ProtectedRoutes/AuthRedirectRoute';
 // import Quillbuild1 from './components/quilldemo/Quillbuild1';
 
 function App() {
@@ -37,14 +38,16 @@ function App() {
           <Route path="/signup" element={<privateRoute isloggedin={isLoggedIn}><SignUp/></privateRoute>}></Route>
           <Route path="/login" element={<privateRoute isloggedin={isLoggedIn}><Login/></privateRoute>}></Route>
           <Route path="/dashboard/:id" element={
-            <PrivateRoute >
+            <AuthProtectedRoute>
               <Dashboard/>
-            </PrivateRoute>
+            </AuthProtectedRoute>
+              
               }>
 
           </Route>
           {/* adding protected route to doc is left*/}
           <Route path="/doc/:docid" element={<FilePage/>}/>
+          <Route path="/about" element={<AboutPage/>}/>
           <Route path='*' element={<NotFound/>}></Route>
         </Route>
         {/* <Route path='/test' element={<Quillbuild1/>}></Route> */}
