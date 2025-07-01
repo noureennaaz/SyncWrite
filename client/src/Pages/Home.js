@@ -5,111 +5,121 @@ import { FaChevronDown } from "react-icons/fa";
 import ScreenVid from "../assets/devicesGif.gif";
 import headerImg from "../assets/header.jpg";
 import Footer from "../components/Footer";
+import BlurText from "../components/style/BlurText";
 import Navbar from "../components/Navbar";
+import Squares from "../components/style/Squares";
 
 export default function Home() {
   const { isLoggedIn, logout } = useAuth();
   const navigate = useNavigate();
-
+  const scrollToOffset = () => {
+    window.scrollBy({ top: 600, behavior: "smooth" });
+  };
   return (
     <div className="w-full overflow-visible bg-cover flex flex-col">
       <Navbar />
 
-      <div className="flex flex-wrap justify-between bg-gradient-to-b from-slate-900 to-gray-600 h-screen w-full gap-10">
-        <div className="flex relative h-full w-full">
-          <img
+      <div className="relative h-screen w-full bg-gradient-to-b from-slate-900 to-gray-600 overflow-hidden">
+        <div className="absolute inset-0 z-10 bg-gradient-to-r from-black via-[#000111c5] to-black" />
+        <div className="absolute inset-0">
+          {/* <img
             src={headerImg}
-            className="h-screen w-full object-cover"
-            alt=""
+            alt="Header Background"
+            className="w-full h-full object-cover"
+          /> */}
+          <Squares
+            speed={0.2}
+            squareSize={40}
+            direction="diagonal" 
+            borderColor="#fff"
+            hoverFillColor="#222"
+            className="w-full h-full"
           />
         </div>
-        <div className="flex absolute h-screen w-full z-10 bg-gradient-to-r from-[#000000]"></div>
 
-        <div className="Head-text absolute z-10 top-60 left-5 md:left-20 w-[90%] md:w-[500px] gap-10 flex flex-col justify-between">
-          <div className="font-bold lg:text-2xl text-xl text-white uppercase">
-            A <span className="text-[#183795]">dynamic</span> canvas for
-            creators, learners, and collaborators. Here’s what sets it apart:
+        <div className="absolute z-20 top-1/2 left-1/2 w-[90%] md:w-[600px] transform -translate-x-1/2 -translate-y-1/2 px-6 md:px-10 flex flex-col items-center gap-8">
+          {/* <BlurText
+            text=""
+            delay={100}
+            animateBy="words"
+            direction="top"
+            className="text-2xl md:text-4xl font-bold text-white uppercase text-center"
+          /> */}
+          <div className="text-2xl md:text-4xl font-bold text-white uppercase text-center">
+            A canvas for
+            <div>
+              creators,
+              <span className="text-blue-400">learners </span>and collaborators
+            </div>
           </div>
-          <div className="uppercase text-white md:font-extralight lg:text-2xl text-base italic">
-            Dive into the world of sharing ideas and celebrate connectivity
-          </div>
-          <NavLink to={`/signup`} className=" relative group">
-            {/* <div className="rounded-[100px] bg-gradient-to-br from-orange-500 to-amber-500 w-full md:w-[380px] h-[50px] lg:h-[60px] top-2 lg:top-3 absolute z-10"></div>
-        <div className="rounded-[100px] bg-white w-full md:w-[380px] h-[50px] lg:h-[60px] relative z-10 text-black group-hover:text-slate-500 flex justify-center items-center text-2xl lg:text-3xl transition-transform ease-in-out group-hover:translate-y-[1px] group-active:translate-y-1">
-          <p className="h-full text-center translate-y-2 font-extrabold">GET STARTED</p>
-        </div> */}
 
-            <button class="relative inline-flex items-center justify-center w-64 px-14 py-5 text-lg overflow-hidden tracking-tighter text-white bg-gray-800 rounded-lg group">
-              <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-orange-600 rounded-full group-hover:w-72 group-hover:h-72"></span>
-              <span class="absolute bottom-0 left-0 h-full -ml-3">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="w-auto h-full opacity-100 object-stretch"
-                  viewBox="0 0 487 487"
-                >
-                  <path
-                    fill-opacity=".1"
-                    fill-rule="nonzero"
-                    fill="#FFF"
-                    d="M0 .3c67 2.1 134.1 4.3 186.3 37 52.2 32.7 89.6 95.8 112.8 150.6 23.2 54.8 32.3 101.4 61.2 149.9 28.9 48.4 77.7 98.8 126.4 149.2H0V.3z"
-                  ></path>
-                </svg>
+          <BlurText
+            text="Dive into the world of sharing ideas and celebrate connectivity"
+            delay={100}
+            animateBy="words"
+            direction="top"
+            className="text-xl md:text-2xl italic text-white font-extralight uppercase text-center"
+          />
+
+          <NavLink to="/signup" className="group relative">
+            <button className="relative inline-block p-px font-semibold text-white bg-neutral-900 shadow-2xl cursor-pointer rounded-2xl shadow-emerald-900 transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 hover:shadow-emerald-600">
+              <span className="absolute inset-0 rounded-2xl bg-gradient-to-r from-emerald-500 via-cyan-500 to-sky-600 p-[2px] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
+              <span className="relative z-10 block px-6 py-3 rounded-2xl bg-neutral-950">
+                <div className="flex items-center justify-center gap-3">
+                  <span className="transition-all duration-500 group-hover:translate-x-1.5 group-hover:text-emerald-300">
+                    Begin Journey
+                  </span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    className="w-7 h-7 transition-all duration-500 group-hover:translate-x-1.5 group-hover:text-emerald-300"
+                  >
+                    <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" />
+                  </svg>
+                </div>
               </span>
-              <span class="absolute top-0 right-0 w-16 h-full -mr-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="object-cover w-full h-full"
-                  viewBox="0 0 487 487"
-                >
-                  <path
-                    fill-opacity=".1"
-                    fill-rule="nonzero"
-                    fill="#FFF"
-                    d="M487 486.7c-66.1-3.6-132.3-7.3-186.3-37s-95.9-85.3-126.2-137.2c-30.4-51.8-49.3-99.9-76.5-151.4C70.9 109.6 35.6 54.8.3 0H487v486.7z"
-                  ></path>
-                </svg>
-              </span>
-              <span class="absolute inset-0 w-full h-full -mt-1  rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-gray-200"></span>
-              <span class="relative font-bold tracking-[0.2px] text-xl">GET STARTED</span>
             </button>
-
-
           </NavLink>
         </div>
-        <div className="absolute right-1/2 bottom-10 left-1/2 animate-bounce">
+
+        <div
+          className="absolute left-1/2 bottom-10 -translate-x-1/2 animate-bounce cursor-pointer z-50"
+          onClick={scrollToOffset}
+        >
           <FaChevronDown color="#ffffff" size={25} />
         </div>
       </div>
 
       <div className="bg-[#F8CB4F] p-10 md:p-20 min-h-[80vh]">
-        <section className="flex flex-wrap p-5 w-full lg:justify-between overflow-hidden box-border">
-          <div className="w-full md:w-[510px] h-[510px] p-[10px] mx-auto -mt-10">
+        <section className="flex flex-col lg:flex-row items-center lg:justify-between w-full gap-10">
+          <div className="w-full max-w-[500px] h-auto">
             <img
               src={ScreenVid}
-              alt=""
-              className="object-cover h-full w-full"
+              alt="Collaboration Visual"
+              className="object-cover w-full h-auto"
             />
           </div>
-          <div className="w-full md:w-[800px] sm:pl-20">
-            <div className="w-full md:w-[500px] lg:h-[500px] h-[300px] mx-auto">
-              <div className=" text-[32px] leading-[40px] lg:text-[45px] lg:leading-[50px] font-[650] flex flex-col justify-center -mt-10 items-start h-full">
-                <span className="text-white">Collaborate with</span>
-                <div className="text-slate-700">
-                  anyone<span className="text-white"> and </span>
-                </div>
-                <div className="text-white">
-                  any<span className="text-slate-700"> device</span>
-                  <div>
-                    from<span className="text-slate-700"> anywhere</span>
-                  </div>
-                </div>
-              </div>
+          <div className="w-full lg:w-[50%]">
+            <div className="flex flex-col justify-center h-full text-start">
+              <h2 className="text-[32px] leading-[40px] lg:text-[45px] lg:leading-[55px] font-[650] text-white">
+                Collaborate with
+              </h2>
+              <h2 className="text-[32px] leading-[40px] lg:text-[45px] lg:leading-[55px] font-[650] text-slate-700">
+                anyone<span className="text-white"> and</span>
+              </h2>
+              <h2 className="text-[32px] leading-[40px] lg:text-[45px] lg:leading-[55px] font-[650] text-white">
+                any<span className="text-slate-700"> device</span>
+              </h2>
+              <h2 className="text-[32px] leading-[40px] lg:text-[45px] lg:leading-[55px] font-[650] text-white">
+                from<span className="text-slate-700"> anywhere</span>
+              </h2>
             </div>
           </div>
         </section>
       </div>
 
-      <section className="h-fit min-h-[90vh] py-32 w-full">
+      <section className="h-fit uppercase bg-stone-950 text-gray-600 font-semibold min-h-[90vh] py-32 w-full">
         <div className="w-[90%]  mx-auto gap-16 h-fit flex flex-wrap justify-evenly">
           <div className="relative group md:w-[300px] w-[200px] h-[300px] md:h-[400px]">
             <div className="relative top-0 w-[200px] h-[200px] md:w-[300px] md:h-[300px] shadow-md bg-gray-500 -rotate-2 group-hover:rotate-0 transition-transform ease-in-out rounded-xl backdrop-blur border"></div>
@@ -122,7 +132,7 @@ export default function Home() {
                 />
               </div>
             </div>
-            <div className="text-lg text-gray-400 text-center md:mt-5 md:px-6 py-8">
+            <div className="text-lg text-center md:mt-5 md:px-6 py-8">
               Real-time code runner with text editor within file
             </div>
           </div>
@@ -137,7 +147,7 @@ export default function Home() {
                 />
               </div>
             </div>
-            <div className="text-lg text-gray-400 text-center md:mt-5 md:px-6 py-8">
+            <div className="text-lg text-center md:mt-5 md:px-6 py-8">
               Share anywhere around world
             </div>
           </div>
@@ -152,7 +162,7 @@ export default function Home() {
                 />
               </div>
             </div>
-            <div className="text-lg text-gray-400 text-center md:mt-5 md:px-6 py-8">
+            <div className="text-lg text-center md:mt-5 md:px-6 py-8">
               Manage the user access right
             </div>
           </div>

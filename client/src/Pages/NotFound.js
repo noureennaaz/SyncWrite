@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 const NotFound = () => {
     const navigate= useNavigate()
     return(
-        <div className="w-screen h-screen flex flex-col bg-slate-600 justify-center items-center">
+        <div className="w-screen h-screen flex flex-col bg-slate-900 justify-center items-center">
             <Navbar/>
             <div className="flex flex-col mt-40 h-[30vh]">
                 <div className="h-60 w-60">

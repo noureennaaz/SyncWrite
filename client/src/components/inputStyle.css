@@ -1,43 +1,35 @@
-/* General input reset for specific types */
 input[type="text"],
 input[type="email"],
 input[type="password"] {
-    all: unset;
-    border: none;
-    background: none;
-    background-color: transparent;
-    box-shadow: none;
-    color: white;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
+  all: unset;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  color: #f9fafb; 
+  background-color: transparent;
+  border: 1px solid #334155; 
+  border-radius: 0.5rem;
+  transition: border 0.3s, background-color 0.3s;
 }
 
-/* Focus state for specific input types */
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus {
-    outline: none;
+  border-color: #38bdf8; 
+  background-color: rgba(255, 255, 255, 0.05);
+  outline: none;
 }
 
-/* Autofill styling */
-input[type="text"]:-webkit-autofill,
-input[type="email"]:-webkit-autofill,
-input[type="password"]:-webkit-autofill,
-input[type="text"]:-webkit-autofill:hover,
-input[type="email"]:-webkit-autofill:hover,
-input[type="password"]:-webkit-autofill:hover,
-input[type="text"]:-webkit-autofill:focus,
-input[type="email"]:-webkit-autofill:focus,
-input[type="password"]:-webkit-autofill:focus,
-input[type="text"]:-webkit-autofill:active,
-input[type="email"]:-webkit-autofill:active,
-input[type="password"]:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px #1C1917 inset !important;
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #1C1917 inset !important;
+  -webkit-text-fill-color: #f9fafb !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
-
-/* Autofill text color */
-input[type="text"]:-webkit-autofill,
-input[type="email"]:-webkit-autofill,
-input[type="password"]:-webkit-autofill {
-    -webkit-text-fill-color: white !important;
+input::placeholder {
+  color: #94a3b8;
+  font-weight: 300;
+  opacity: 0.8;
 }

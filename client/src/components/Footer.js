@@ -1,66 +1,73 @@
 export default function () {
   return (
     <div>
-      <footer className="bg-slate-900 text-white py-[50px] px-0"> 
-        <div class="flex flex-wrap justify-between max-w-[1200px] m-auto gap-10 py-0 px-[20px]">
-          <div class=" m-[20px] uppercase tracking-wide">
-            <h3>MyDocs</h3>
-            <p>
-              The ultimate note keeper for everyone. 
+      <footer className="bg-[#020617] text-white py-10 px-5 md:px-20">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
+          <div>
+            <h2 className="text-2xl font-bold text-slate-100">MyDocs</h2>
+            <p className="text-gray-400 mt-2 text-sm">
+              The ultimate note keeper for everyone. Collaborate. Create. Share.
             </p>
           </div>
 
-          <div class="footer-column">
-            <h4>Quick Links</h4>
-            <ul>
-              <li className="mb-[15px] ">
-                <a href="#home" className="font-semibold  transition-colors duration-300 hover:text-slate-500">Home</a>
+          <div>
+            <h3 className="font-semibold text-lg mb-4">Quick Links</h3>
+            <ul className="space-y-2 text-gray-300 text-sm">
+              <li>
+                <a href="/" className="hover:text-white">
+                  Home
+                </a>
               </li>
-              <li className="mb-[15px] ">
-                <a href="#products" className="font-semibold  transition-colors duration-300 hover:text-slate-500">Products</a>
+              <li>
+                <a href="/about" className="hover:text-white">
+                  About
+                </a>
               </li>
-              <li className="mb-[15px] ">
-                <a href="#about" className="font-semibold  transition-colors duration-300 hover:text-slate-500">About Us</a>
+              <li>
+                <a href="/dashboard" className="hover:text-white">
+                  Dashboard
+                </a>
               </li>
-              <li className="mb-[15px] ">
-                <a href="#contact" className="font-semibold transition-colors duration-300 hover:text-slate-500">Contact</a>
+              <li>
+                <a href="/signup" className="hover:text-white">
+                  Get Started
+                </a>
               </li>
             </ul>
           </div>
 
-          <div class="footer-column">
-            <h4>Contact Us</h4>
-            <ul>
-              <li className="mb-[15px] ">Email: support@vv.com</li>
-              <li className="mb-[15px] ">Phone: +855 (123) 123-123</li>
-              <li className="mb-[15px] ">Address: nv pp yg ng</li>
+          <div>
+            <h3 className="font-semibold text-lg mb-4">Contact</h3>
+            <ul className="text-sm text-gray-300 space-y-2">
+              <li>Email: support@mydocs.io</li>
+              <li>Phone: +91 99999 99999</li>
+              <li>Address: Madhya Pradesh, India🌍</li>
             </ul>
           </div>
-
-          <div class="footer-column">
-            <h4>Follow Us</h4>
-            <div class="flex">
+          <div>
+            <h3 className="font-semibold text-lg mb-4">Follow Us</h3>
+            <div className="flex space-x-4 text-gray-400">
               <a href="#">
-                <i className="mr-2 hover:scale-[1.2] transition-transform fa-facebook"></i>
+                <i className="fab fa-facebook hover:text-white"></i>
               </a>
               <a href="#">
-                <i className="mr-2 hover:scale-[1.2] transition-transform fa fa-twitter"></i>
+                <i className="fab fa-twitter hover:text-white"></i>
               </a>
               <a href="#">
-                <i className="mr-2 hover:scale-[1.2] transition-transform fa fa-instagram"></i>
+                <i className="fab fa-linkedin hover:text-white"></i>
               </a>
               <a href="#">
-                <i className="mr-2 hover:scale-[1.2] transition-transform fa fa-linkedin"></i>
+                <i className="fab fa-github hover:text-white"></i>
               </a>
             </div>
           </div>
         </div>
 
-        <div class="text-center mt-10 pt-5 border-t border-gray-600">
-          <p>
-            &copy;All Rights Reserved |{" "}
-            <a href="#privacy-policy">Privacy Policy</a>
-          </p>
+        <div className="mt-10 border-t border-gray-700 pt-6 text-center text-sm text-gray-500">
+          © {new Date().getFullYear()} MyDocs. All rights reserved. |{" "}
+          <a href="/privacy" className="hover:underline">
+            Privacy Policy
+          </a>
         </div>
       </footer>
     </div>

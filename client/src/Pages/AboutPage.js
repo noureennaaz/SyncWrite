@@ -1,63 +1,71 @@
 import { NavLink } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import Squares from "../components/style/Squares";
+import Footer from "../components/Footer";
 
-const AboutPage = ()=>{
-    return (
-        <div className="bg-slate-900 min-h-screen py-10 px-5 md:px-20">
-        <Navbar></Navbar>
-      <div className="max-w-4xl mx-auto bg-black shadow-lg mt-16 rounded-lg p-8">
-        <div>
-        <div>
-            <h1 className="text-4xl font-bold text-amber-400 mb-6 text-center">About SyncWrite</h1>
-            <p className="text-stone-200 text-lg mb-6">
-            <strong className="text-orange-400">SyncWrite</strong> is a collaborative writing platform designed to bring writers, teams, and creators together in a seamless and dynamic environment. Whether you're drafting documents, brainstorming ideas, or managing projects, SyncWrite empowers you to write, edit, and share content in real-time.
-            </p>
+const AboutPage = () => {
+  return (
+    <div className="bg-slate-900 min-h-screen">
+      <Navbar />
+
+      <div className="relative h-screen w-full bg-gradient-to-b from-slate-900 to-gray-600 overflow-hidden">
+
+        <div className="absolute inset-0 z-10 bg-gradient-to-r from-black via-[#000111c5] to-black" />
+
+        <div className="absolute inset-0">
+          <Squares
+            speed={0.2}
+            squareSize={40}
+            direction="diagonal"
+            borderColor="#fff"
+            hoverFillColor="#222"
+            className="w-full h-full"
+          />
         </div>
-        <div>
-            
-        </div>
-        </div>
 
-        <h2 className="text-2xl font-semibold text-amber-300 mb-4">Our Mission</h2>
-        <p className="text-stone-200 mb-6">
-          To revolutionize the writing experience by providing an intuitive and powerful platform that fosters creativity, collaboration, and productivity.
-        </p>
+        <div className="absolute z-20 top-1/2 left-1/2 w-[90%] md:w-[700px] transform -translate-x-1/2 -translate-y-1/2 px-6 md:px-10 pt-20 flex flex-col items-center gap-10 text-center">
+          <h1 className="text-3xl md:text-5xl font-bold text-white uppercase">
+            About <span className="text-emerald-400">SyncWrite</span>
+          </h1>
 
-        <h2 className="text-2xl font-semibold text-amber-300 mb-4">What Makes SyncWrite Different?</h2>
-        <ul className="list-disc list-inside text-stone-200 mb-6 space-y-2">
-          <li><strong className="text-orange-400">Real-Time Collaboration</strong> – Work with your team in real-time with instant updates and edits.</li>
-          <li><strong className="text-orange-400">Cloud-Based Access</strong> – Write and access your documents anytime, anywhere.</li>
-          <li><strong className="text-orange-400">Secure & Reliable</strong> – Your content is encrypted and protected with the highest security standards.</li>
-          <li><strong className="text-orange-400">Organized Workspace</strong> – Keep your projects, documents, and notes well-structured and easily accessible.</li>
-          <li><strong className="text-orange-400">Auto-Save & Version History</strong> – Never lose your work with automatic backups and version tracking.</li>
-          <li><strong className="text-orange-400">Customizable Editor</strong> – Write your way with a clean, distraction-free interface tailored to your needs.</li>
-        </ul>
+          <p className="text-white md:text-xl font-light">
+            SyncWrite is a collaborative platform that empowers users to create,
+            share, and manage content seamlessly. Whether you're a student,
+            developer, or professional, SyncWrite makes teamwork effortless with
+            real-time editing, access control, and sharing capabilities.
+          </p>
 
-        <h2 className="text-2xl font-semibold text-amber-300 mb-4">Who We Serve</h2>
-        <ul className="list-disc list-inside text-stone-200 mb-6 space-y-2">
-          <li><strong className="text-orange-400">Writers & Authors</strong> looking for a focused, distraction-free writing space.</li>
-          <li><strong className="text-orange-400">Teams & Startups</strong> needing real-time collaboration and project management.</li>
-          <li><strong className="text-orange-400">Students & Educators</strong> working on group projects and academic papers.</li>
-          <li><strong className="text-orange-400">Businesses</strong> streamlining document workflows and internal communications.</li>
-        </ul>
+          <p className="text-white md:text-lg font-light italic">
+            Our mission is to foster creativity, collaboration, and
+            communication across the globe by simplifying the way people connect
+            and work together.
+          </p>
 
-        <h2 className="text-2xl font-semibold text-amber-300 mb-4">Our Vision</h2>
-        <p className="text-stone-200 mb-6">
-          To create a world where ideas flow freely and collaboration knows no boundaries.
-        </p>
-
-        <h2 className="text-2xl font-semibold text-amber-300 mb-4">Join the SyncWrite Community</h2>
-        <p className="text-stone-200 mb-6">
-          Whether you're writing solo or collaborating with a team, <strong className="text-orange-400">SyncWrite</strong> is here to support your creative process every step of the way.
-        </p>
-
-        <div className="text-center mt-8">
-          <p className="text-stone-300">📧 <strong className="text-orange-400">Contact Us:</strong> support@syncwrite.com</p>
-          <p className="text-stone-300">🌐 <strong className="text-orange-400">Website:</strong> www.syncwrite.com</p>
+          <NavLink to="/signup" className="group relative">
+            <button className="relative inline-block p-px font-semibold text-white bg-neutral-900 shadow-2xl cursor-pointer rounded-2xl shadow-emerald-900 transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 hover:shadow-emerald-600">
+              <span className="absolute inset-0 rounded-2xl bg-gradient-to-r from-emerald-500 via-cyan-500 to-sky-600 p-[2px] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
+              <span className="relative z-10 block px-6 py-3 rounded-2xl bg-neutral-950">
+                <div className="flex items-center justify-center gap-3">
+                  <span className="transition-all duration-500 group-hover:translate-x-1.5 group-hover:text-emerald-300">
+                    Join Us
+                  </span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    className="w-7 h-7 transition-all duration-500 group-hover:translate-x-1.5 group-hover:text-emerald-300"
+                  >
+                    <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" />
+                  </svg>
+                </div>
+              </span>
+            </button>
+          </NavLink>
         </div>
       </div>
+      <Footer/>
     </div>
-    )
-}
+  );
+};
 
-export default AboutPage ; 
+export default AboutPage;

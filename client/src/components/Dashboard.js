@@ -14,14 +14,13 @@ const Dashboard = () => {
   const [tab, setTab] = useState("All");
   const [filedata, setFileData] = useState("");
   const [create, setCreate] = useState(false);
-  
 
   const fetchInfo = async (id) => {
     try {
-      const data = await fetchUserInfo(id); // Await the function in case it returns a Promise
+      const data = await fetchUserInfo(id);
 
       if (!data || !data.data) {
-        throw new Error("No data received"); // Handling null/undefined case
+        throw new Error("No data received"); // Handling undefined
       }
 
       setDashboardData(data.data);
@@ -116,30 +115,27 @@ const Dashboard = () => {
             </div>
           </section>
           <div className="fixed bottom-10 right-10 md:bottom-16 md:right-20">
+            <button
+              onClick={() => setCreate((value) => !value)}
+              className="group flex items-center justify-start w-11 h-11 bg-orange-600 rounded-full cursor-pointer relative overflow-hidden transition-all duration-200 shadow-lg hover:w-28 active:translate-x-1 active:translate-y-1"
+            >
+              <div className="hover:shadow-lg flex items-center justify-center w-full transition-all duration-300 group-hover:justify-start group-hover:px-3">
+                <IoMdAdd
+                  size={25}
+                  color="#ffffff"
+                  className="transition-transform duration-700 group-hover:scale-110 group-hover:rotate-90"
+                />
+              </div>
 
-          <button onClick={() => setCreate((value)=>!value)} 
-  className="group flex items-center justify-start w-11 h-11 bg-orange-600 rounded-full cursor-pointer relative overflow-hidden transition-all duration-200 shadow-lg hover:w-28 active:translate-x-1 active:translate-y-1"
->
-  {/* Icon */}
-  <div className="hover:shadow-lg flex items-center justify-center w-full transition-all duration-300 group-hover:justify-start group-hover:px-3">
-    <IoMdAdd
-      size={25}
-      color="#ffffff"
-      className="transition-transform duration-700 group-hover:scale-110 group-hover:rotate-90"
-    />
-  </div>
-
-  {/* Text (Appears on Hover) */}
-  <div className="cursor-pointer absolute right-5 transform translate-x-full opacity-0 text-white text-lg font-semibold transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
-    Create
-  </div>
-</button>
-
+              <div className="cursor-pointer absolute right-5 transform translate-x-full opacity-0 text-white text-lg font-semibold transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
+                Create
+              </div>
+            </button>
           </div>
         </div>
       )}
 
-      {create && <CreateFile setCreate={setCreate}/>}
+      {create && <CreateFile setCreate={setCreate} />}
     </div>
   );
 };
