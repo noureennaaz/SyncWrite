@@ -5,7 +5,7 @@ import { useAuth } from "../middlewares/Auth";
 const ProfileDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
-  const { fetchUserInfo ,isLoggedIn} = useAuth()
+  const { fetchUserInfo ,isLoggedIn, logout} = useAuth()
   const[ profileImage , setprofileImage]=useState(null)
   const[user ,setUser] = useState("")
 
@@ -93,7 +93,7 @@ const ProfileDropdown = () => {
           <ul className="mt-2 text-slate-700 text-sm font-normal">
             <li className="p-2 hover:bg-gray-100 cursor-pointer">Manage Account</li>
             <li className="p-2 hover:bg-gray-100 cursor-pointer">Notifications</li>
-            <li className="p-2 text-red-500 hover:bg-gray-100 cursor-pointer">Logout</li>
+            <li className="p-2 text-red-500 hover:bg-gray-100 cursor-pointer" onClick={logout}>Logout</li>
           </ul>
         </div>
       )}

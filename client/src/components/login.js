@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import { useAuth } from "../middlewares/Auth";
 import { toast } from "react-toastify";
 import ScreenVid from "../assets/devicesGif.gif";
-import Navbar from "./Navbar";
+// import Navbar from "./Navbar";
 
 const Login = () => {
   const { fetchData, login, logout, isLoggedIn, setIsLoggedIn } = useAuth();
@@ -106,12 +106,12 @@ const Login = () => {
   
 
   return (
-    <div className="min-w-screen overflow-hidden min-h-screen m-0 flex justify-center items-center bg-stone-900 p-8">
+    <div className="min-w-screen overflow-hidden min-h-screen m-0 flex justify-center items-center bg-stone-900 p-0 sm:p-8">
     
       {loader ? (
         <div>Loading</div>
       ) : (
-        <div className="flex h-[90vh] max-w-[90%] rounded-3xl p-5 shadow-lg bg-black">
+        <div className="flex sm:h-[90vh] h-screen min-h-fit sm:rounded-3xl p-5 shadow-lg bg-black">
           <div>
             <form
               className="h-[22rem] max-w-full  lg:w-[400px] text rounded-lg flex flex-col justify-evenly"
@@ -127,14 +127,14 @@ const Login = () => {
                   <div>Welcome,</div>
                 </div>
                 <div>
-                  <h1 className="text-4xl text-gray-200 pr-10 pt-2 pb-5 font-[500] tracking-wide">
+                  <h1 className="lg:text-4xl text-2xl text-gray-200 pr-10 pt-2 lg:pb-5 font-[500] tracking-wide">
                     Login to <br />
                     your account
                   </h1>
                 </div>
               </div>
               <div>
-                <p className="text-slate-400 pt-5 pb-3 font-medium text-base">
+                <p className="text-slate-400 py-2 lg:pt-5 lg:pb-3 font-medium text-base">
                   New User..?{" "}
                   <NavLink to={`/signup`} className=" hover:text-amber-900 transition-colors pl-4 text-amber-600">
                     {" "}
@@ -146,7 +146,7 @@ const Login = () => {
               <div className="flex flex-col text-lg">
                 <label
                   labelfor="email"
-                  className=" text-slate-500 text-sm flex flex-col font-medium rounded-[30px] bg-stone-900 py-2 px-5"
+                  className=" text-slate-500 text-sm flex flex-col font-medium rounded-[30px] bg-stone-900 px-5"
                 >
                   Email
                   <input
@@ -164,7 +164,7 @@ const Login = () => {
               <div className="flex flex-col text-lg ">
                 <label
                   labelfor="password"
-                  className=" text-slate-500 text-sm flex flex-col font-medium rounded-[30px] bg-stone-900  py-2 px-5"
+                  className=" text-slate-500 text-sm flex flex-col font-medium rounded-[30px] bg-stone-900 px-5"
                 >
                   Password
                   <input

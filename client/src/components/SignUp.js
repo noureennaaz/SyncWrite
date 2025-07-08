@@ -130,10 +130,11 @@ const SignUp = () => {
   };
 
   return (
-    <div className="w-screen h-screen m-0 flex justify-center items-center bg-stone-900 p-8">
-      <div className="flex min-h-[93vh] sm:min-w-fit min-w-[96%] rounded-3xl p-5 box-border bg-black">
+    <div className="w-screen h-screen m-0 flex justify-center items-center bg-stone-900 p-0 sm:p-8">
+      <div className="flex sm:min-h-[93vh] sm:min-w-fit min-w-[96%] sm:rounded-3xl p-5 box-border bg-black">
+        {/* flex sm:h-[90vh] h-screen min-h-fit sm:rounded-3xl p-5 shadow-lg bg-black */}
         <form
-          className="max-w-full h-[580px] sm:w-[400px] shadow-lg text bg-black rounded-lg flex flex-col relative justify-evenly"
+          className="max-w-full h-[580px] sm:w-[400px] shadow-lg text bg-black flex flex-col relative justify-evenly"
           onSubmit={handleSubmit(onSubmit)}
         >
           
@@ -148,7 +149,7 @@ const SignUp = () => {
               <div>Get started,</div>
             </div>
             <div>
-              <h1 className="sm:text-4xl text-gray-200 pr-10 py-2 font-[500] tracking-wide">
+              <h1 className="lg:text-4xl text-2xl text-gray-200 pr-10 py-2 font-[500] tracking-wide">
                 Create <br />
                 your account
               </h1>
@@ -167,7 +168,7 @@ const SignUp = () => {
             <div className="flex flex-col text-lg">
               <label
                 labelfor="fname"
-                className="sm:w-[170px] text-slate-500 text-sm flex flex-col font-medium rounded-[30px] bg-stone-900  py-2 px-5"
+                className="sm:w-[170px] text-slate-500 text-sm flex flex-col font-medium rounded-[30px] bg-stone-900 px-5"
               >
                 First name:
                 <input
@@ -184,7 +185,7 @@ const SignUp = () => {
             <div className="flex flex-col text-lg ">
               <label
                 labelfor="lname"
-                className="sm:w-[170px] text-slate-500 text-sm flex flex-col font-medium rounded-[30px] bg-stone-900 py-2 px-5"
+                className="sm:w-[170px] text-slate-500 text-sm flex flex-col font-medium rounded-[30px] bg-stone-900 px-5"
               >
                 Last name:
                 <input
@@ -202,7 +203,7 @@ const SignUp = () => {
           <div className="flex flex-col text-lg py-3">
             <label
               labelfor="email"
-              className="sm:w-[350px] text-slate-500 text-sm flex flex-col font-medium rounded-[30px] bg-stone-900  py-2 px-5"
+              className="sm:w-[350px] text-slate-500 text-sm flex flex-col font-medium rounded-[30px] bg-stone-900 px-5"
             >
               Email:
               <input
@@ -221,7 +222,7 @@ const SignUp = () => {
             <div className="flex flex-col text-lg sm:w-[170px]">
               <label
                 labelfor="password"
-                className=" text-slate-500 text-sm flex flex-col font-medium rounded-[30px] bg-stone-900  py-2 px-5"
+                className=" text-slate-500 text-sm flex flex-col font-medium rounded-[30px] bg-stone-900 px-5"
               >
                 Password
                 <input
@@ -239,7 +240,7 @@ const SignUp = () => {
             <div className="flex flex-col text-lg  sm:w-[170px]">
               <label
                 labelfor="confirmPassword"
-                className=" text-slate-500 text-sm flex flex-col font-medium rounded-[30px] bg-stone-900 py-2 px-5"
+                className=" text-slate-500 text-sm flex flex-col font-medium rounded-[30px] bg-stone-900 px-5"
               >
                 Confirm Password
                 <input

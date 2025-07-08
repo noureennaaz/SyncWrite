@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Squares from "../components/style/Squares";
 import Footer from "../components/Footer";
+import Feature from "../components/Feature";
 
 const AboutPage = () => {
   return (
@@ -63,6 +64,7 @@ const AboutPage = () => {
           </NavLink>
         </div>
       </div>
+      <Feature/>
       <Footer/>
     </div>
   );
